@@ -21,7 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light text-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">PT. Meksiko</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-       
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-
             controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,27 +43,40 @@
     </nav>
     <div style="background-color:#F5F5F5">
     <h1 class="text-center" style="font-weight: bold" >LIST KARYAWAN</h1>
-    <div class="d-flex mx-5 flex-wrap">
-        @foreach($karyawans as $karyawan)
-            <div class="card w-40 my-5 mx-5"">
-                <div class="card-body">
-                    <h5 class="card-title"><b>{{$karyawan->Nama}}</b></h5>
-                    <p class="card-text">UMUR: {{$karyawan->Umur}}</p>
-                    <p class="card-text">ALAMAT: {{$karyawan->Alamat}}</p>
-                    <p class="card-text">NO. TELP: {{$karyawan->Telepon}}</p>
+    <table class="table table-bordered" class=".ms-1">
+        <thead>
+            <tr>
+            <th scope="col">Nama</th>
+            <th scope="col">Umur</th>
+            <th scope="col">Alamat</th>
+            <th scope="col">No. Telp</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($karyawans as $karyawan)
+                <tr>
+                <td>{{$karyawan->Nama}}</td>
+                <td>{{$karyawan->Umur}}</td>
+                <td>{{$karyawan->Alamat}}</td>
+                <td>{{$karyawan->Telepon}}</td>
+                <td class="text-center">
                     <a href="{{route('edit', $karyawan -> id)}}" class="btn btn-success">Edit</a>
+                </td>
+                <td class="text-center">
                     <form action="/delete-karyawan/{{$karyawan->id}}" method="POST">
                         @csrf
                         @method('delete')
                         <button  class="btn btn-danger">Delete</button>
                     </form>
-                    
-                </div>
-            </div>
-        @endforeach
+                </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
     </div>
-    </div>
-    
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
